@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 Apr 2017 pada 09.57
--- Versi Server: 5.6.17
--- PHP Version: 5.5.12
+-- Generation Time: Mar 29, 2020 at 01:29 AM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `db_penjualan`
@@ -23,35 +25,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_barang`
+-- Table structure for table `tbl_barang`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_barang` (
+CREATE TABLE `tbl_barang` (
   `barang_id` varchar(15) NOT NULL,
   `barang_nama` varchar(150) DEFAULT NULL,
   `barang_satuan` varchar(30) DEFAULT NULL,
   `barang_harpok` double DEFAULT NULL,
   `barang_harjul` double DEFAULT NULL,
   `barang_harjul_grosir` double DEFAULT NULL,
-  `barang_stok` int(11) DEFAULT '0',
-  `barang_min_stok` int(11) DEFAULT '0',
-  `barang_tgl_input` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `barang_stok` int(11) DEFAULT 0,
+  `barang_min_stok` int(11) DEFAULT 0,
+  `barang_tgl_input` timestamp NULL DEFAULT current_timestamp(),
   `barang_tgl_last_update` datetime DEFAULT NULL,
   `barang_kategori_id` int(11) DEFAULT NULL,
-  `barang_user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`barang_id`),
-  KEY `barang_user_id` (`barang_user_id`),
-  KEY `barang_kategori_id` (`barang_kategori_id`)
+  `barang_user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_barang`
+-- Dumping data for table `tbl_barang`
 --
 
 INSERT INTO `tbl_barang` (`barang_id`, `barang_nama`, `barang_satuan`, `barang_harpok`, `barang_harjul`, `barang_harjul_grosir`, `barang_stok`, `barang_min_stok`, `barang_tgl_input`, `barang_tgl_last_update`, `barang_kategori_id`, `barang_user_id`) VALUES
 ('BR000001', 'Klem Kabel IKK No 7', 'Bks', 15000, 20000, 17000, 2, 1, '2016-11-22 23:30:50', NULL, 11, 1),
 ('BR000002', 'Klem Kabel IKK No 8', 'Bks', 16000, 20000, 18000, 2, 1, '2016-11-22 23:32:02', NULL, 11, 1),
-('BR000003', 'Klem Kabel IKK No 9', 'Bks', 16000, 22000, 18500, 2, 1, '2016-11-22 23:33:08', NULL, 11, 1),
+('BR000003', 'Klem Kabel IKK No 9', 'Bks', 16000, 22000, 18500, 1, 1, '2016-11-22 23:33:08', NULL, 11, 1),
 ('BR000004', 'Klem Kabel IKK No 10', 'Bks', 17000, 24000, 19000, 2, 1, '2016-11-22 23:34:19', NULL, 11, 1),
 ('BR000005', 'Klem kabel dms No 6', 'Bks', 3000, 5000, 4000, 2, 1, '2016-11-22 23:35:23', NULL, 10, 1),
 ('BR000006', 'Klem kabel dms No 7', 'Bks', 3500, 6000, 4500, 2, 1, '2016-11-22 23:36:23', NULL, 10, 1),
@@ -79,16 +78,16 @@ INSERT INTO `tbl_barang` (`barang_id`, `barang_nama`, `barang_satuan`, `barang_h
 ('BR000029', 'MCB Sheineder 16A SNI', 'PCS', 47500, 70000, 55000, 2, 1, '2016-11-23 00:21:53', NULL, 7, 1),
 ('BR000030', 'MCB Sheineder 20A SNI', 'PCS', 47500, 70000, 55000, 2, 1, '2016-11-23 00:22:39', NULL, 7, 1),
 ('BR000031', 'MCB Sheineder 25A SNI', 'PCS', 47500, 70000, 55000, 2, 1, '2016-11-23 00:23:18', NULL, 7, 1),
-('BR000032', 'Saklar Engkel Visalux B', 'PCS', 7250, 10000, 7750, 2, 1, '2016-11-23 00:33:27', '2016-11-22 16:33:57', 6, 1),
-('BR000034', 'Stop Kontak Visalux B', 'PCS', 10250, 12000, 0, 1, 1, '2016-11-23 00:35:23', NULL, 6, 1),
-('BR000038', 'Saklar Arde Visalux 2L', 'PCS', 8200, 9000, 12000, 0, 1, '2016-11-23 00:38:12', NULL, 6, 1),
-('BR000039', 'Saklar Arde Visalux 3L', 'PCS', 10500, 15000, 11500, 2, 1, '2016-11-23 00:39:07', NULL, 6, 1),
-('BR000040', 'Saklar Arde Visalux 4L', 'PCS', 13500, 18000, 14000, 2, 1, '2016-11-23 00:39:51', NULL, 6, 1),
+('BR000032', 'Saklar Engkel Visalux B', 'PCS', 7250, 10000, 7750, 1, 1, '2016-11-23 00:33:27', '2016-11-22 16:33:57', 6, 1),
+('BR000034', 'Stop Kontak Visalux B', 'PCS', 10250, 12000, 0, 0, 1, '2016-11-23 00:35:23', NULL, 6, 1),
+('BR000038', 'Saklar Arde Visalux 2L', 'PCS', 8200, 9000, 12000, -1, 1, '2016-11-23 00:38:12', NULL, 6, 1),
+('BR000039', 'Saklar Arde Visalux 3L', 'PCS', 10500, 15000, 11500, 1, 1, '2016-11-23 00:39:07', NULL, 6, 1),
+('BR000040', 'Saklar Arde Visalux 4L', 'PCS', 13500, 18000, 14000, 1, 1, '2016-11-23 00:39:51', NULL, 6, 1),
 ('BR000041', 'Saklar Arde Visalux 5L', 'PCS', 15500, 22000, 18000, 2, 1, '2016-11-23 00:40:34', NULL, 6, 1),
 ('BR000042', 'Saklar Arde Visalux 6L', 'PCS', 19500, 25000, 21000, 2, 1, '2016-11-23 00:41:15', NULL, 6, 1),
-('BR000043', 'Saklar Engkel Omi KK', 'PCS', 4500, 10000, 6000, 7, 1, '2016-11-23 00:52:21', '2016-11-29 14:35:29', 5, 1),
+('BR000043', 'Saklar Engkel Omi KK', 'PCS', 4500, 10000, 6000, 17, 1, '2016-11-23 00:52:21', '2016-11-29 14:35:29', 5, 1),
 ('BR000044', 'Saklar Seri Omi KK', 'PCS', 5700, 10000, 6500, 2, 1, '2016-11-23 00:53:37', NULL, 5, 1),
-('BR000045', 'Stok Kontak Omi KK', 'PCS', 5700, 10000, 6500, 1, 1, '2016-11-23 00:54:31', NULL, 5, 1),
+('BR000045', 'Stok Kontak Omi KK', 'PCS', 5700, 10000, 6500, 0, 1, '2016-11-23 00:54:31', NULL, 5, 1),
 ('BR000047', 'K. NYM 2x1,5 Voxel Per Meter', 'Meter', 6055, 8000, 6500, 2, 1, '2016-11-23 01:07:43', NULL, 12, 1),
 ('BR000049', 'K. NYM 2x2,5 Voxel Per Meter', 'Meter', 0, 10000, 9500, 2, 1, '2016-11-23 01:09:52', NULL, 12, 1),
 ('BR000051', 'K. NYM 3x1,5 Voxel Per Meter', 'Meter', 0, 10000, 9000, 2, 1, '2016-11-23 01:11:10', NULL, 12, 1),
@@ -275,49 +274,55 @@ INSERT INTO `tbl_barang` (`barang_id`, `barang_nama`, `barang_satuan`, `barang_h
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_beli`
+-- Table structure for table `tbl_beli`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_beli` (
+CREATE TABLE `tbl_beli` (
   `beli_nofak` varchar(15) DEFAULT NULL,
   `beli_tanggal` date DEFAULT NULL,
   `beli_suplier_id` int(11) DEFAULT NULL,
   `beli_user_id` int(11) DEFAULT NULL,
-  `beli_kode` varchar(15) NOT NULL,
-  PRIMARY KEY (`beli_kode`),
-  KEY `beli_user_id` (`beli_user_id`),
-  KEY `beli_suplier_id` (`beli_suplier_id`),
-  KEY `beli_id` (`beli_kode`)
+  `beli_kode` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_beli`
+--
+
+INSERT INTO `tbl_beli` (`beli_nofak`, `beli_tanggal`, `beli_suplier_id`, `beli_user_id`, `beli_kode`) VALUES
+('290320000001', '2020-04-02', 1, 1, 'BL290320000001');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_detail_beli`
+-- Table structure for table `tbl_detail_beli`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_detail_beli` (
-  `d_beli_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_detail_beli` (
+  `d_beli_id` int(11) NOT NULL,
   `d_beli_nofak` varchar(15) DEFAULT NULL,
   `d_beli_barang_id` varchar(15) DEFAULT NULL,
   `d_beli_harga` double DEFAULT NULL,
   `d_beli_jumlah` int(11) DEFAULT NULL,
   `d_beli_total` double DEFAULT NULL,
-  `d_beli_kode` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`d_beli_id`),
-  KEY `d_beli_barang_id` (`d_beli_barang_id`),
-  KEY `d_beli_nofak` (`d_beli_nofak`),
-  KEY `d_beli_kode` (`d_beli_kode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `d_beli_kode` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_detail_beli`
+--
+
+INSERT INTO `tbl_detail_beli` (`d_beli_id`, `d_beli_nofak`, `d_beli_barang_id`, `d_beli_harga`, `d_beli_jumlah`, `d_beli_total`, `d_beli_kode`) VALUES
+(1, '290320000001', 'BR000043', 4500, 10, 45000, 'BL290320000001');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_detail_jual`
+-- Table structure for table `tbl_detail_jual`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_detail_jual` (
-  `d_jual_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_detail_jual` (
+  `d_jual_id` int(11) NOT NULL,
   `d_jual_nofak` varchar(15) DEFAULT NULL,
   `d_jual_barang_id` varchar(15) DEFAULT NULL,
   `d_jual_barang_nama` varchar(150) DEFAULT NULL,
@@ -326,14 +331,11 @@ CREATE TABLE IF NOT EXISTS `tbl_detail_jual` (
   `d_jual_barang_harjul` double DEFAULT NULL,
   `d_jual_qty` int(11) DEFAULT NULL,
   `d_jual_diskon` double DEFAULT NULL,
-  `d_jual_total` double DEFAULT NULL,
-  PRIMARY KEY (`d_jual_id`),
-  KEY `d_jual_barang_id` (`d_jual_barang_id`),
-  KEY `d_jual_nofak` (`d_jual_nofak`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `d_jual_total` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_detail_jual`
+-- Dumping data for table `tbl_detail_jual`
 --
 
 INSERT INTO `tbl_detail_jual` (`d_jual_id`, `d_jual_nofak`, `d_jual_barang_id`, `d_jual_barang_nama`, `d_jual_barang_satuan`, `d_jual_barang_harpok`, `d_jual_barang_harjul`, `d_jual_qty`, `d_jual_diskon`, `d_jual_total`) VALUES
@@ -361,28 +363,33 @@ INSERT INTO `tbl_detail_jual` (`d_jual_id`, `d_jual_nofak`, `d_jual_barang_id`, 
 (22, '240117000001', 'BR000043', 'Saklar Engkel Omi KK', 'PCS', 4500, 10000, 1, 0, 10000),
 (23, '240117000002', 'BR000043', 'Saklar Engkel Omi KK', 'PCS', 4500, 10000, 1, 0, 10000),
 (24, '290317000001', 'BR000034', 'Stop Kontak Visalux B', 'PCS', 10250, 12000, 1, 0, 12000),
-(25, '290317000001', 'BR000043', 'Saklar Engkel Omi KK', 'PCS', 4500, 10000, 1, 0, 10000);
+(25, '290317000001', 'BR000043', 'Saklar Engkel Omi KK', 'PCS', 4500, 10000, 1, 0, 10000),
+(26, '280320000001', 'BR000032', 'Saklar Engkel Visalux B', 'PCS', 7250, 10000, 1, 0, 10000),
+(27, '280320000001', 'BR000003', 'Klem Kabel IKK No 9', 'Bks', 16000, 22000, 1, 0, 22000),
+(28, '280320000002', 'BR000045', 'Stok Kontak Omi KK', 'PCS', 5700, 6500, 1, 0, 6500),
+(29, '280320000002', 'BR000038', 'Saklar Arde Visalux 2L', 'PCS', 8200, 12000, 1, 0, 12000),
+(30, '290320000001', 'BR000039', 'Saklar Arde Visalux 3L', 'PCS', 10500, 15000, 1, 0, 15000),
+(31, '290320000002', 'BR000034', 'Stop Kontak Visalux B', 'PCS', 10250, 12000, 1, 0, 12000),
+(32, '290320000002', 'BR000040', 'Saklar Arde Visalux 4L', 'PCS', 13500, 18000, 1, 0, 18000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_jual`
+-- Table structure for table `tbl_jual`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_jual` (
+CREATE TABLE `tbl_jual` (
   `jual_nofak` varchar(15) NOT NULL,
-  `jual_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `jual_tanggal` timestamp NULL DEFAULT current_timestamp(),
   `jual_total` double DEFAULT NULL,
   `jual_jml_uang` double DEFAULT NULL,
   `jual_kembalian` double DEFAULT NULL,
   `jual_user_id` int(11) DEFAULT NULL,
-  `jual_keterangan` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`jual_nofak`),
-  KEY `jual_user_id` (`jual_user_id`)
+  `jual_keterangan` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_jual`
+-- Dumping data for table `tbl_jual`
 --
 
 INSERT INTO `tbl_jual` (`jual_nofak`, `jual_tanggal`, `jual_total`, `jual_jml_uang`, `jual_kembalian`, `jual_user_id`, `jual_keterangan`) VALUES
@@ -398,7 +405,11 @@ INSERT INTO `tbl_jual` (`jual_nofak`, `jual_tanggal`, `jual_total`, `jual_jml_ua
 ('241116000008', '2016-11-24 18:32:01', 13000, 15000, 2000, 1, 'eceran'),
 ('241116000009', '2016-11-24 19:47:50', 6000, 7000, 1000, 1, 'grosir'),
 ('251116000001', '2016-11-25 22:07:15', 19000, 60000, 41000, 1, 'eceran'),
+('280320000001', '2020-03-28 10:07:11', 32000, 100000, 68000, 1, 'eceran'),
+('280320000002', '2020-03-28 13:42:33', 18500, 100000, 81500, 1, 'grosir'),
 ('290317000001', '2017-03-29 13:35:49', 22000, 56000, 34000, 1, 'eceran'),
+('290320000001', '2020-03-28 23:24:44', 15000, 100000, 85000, 1, 'eceran'),
+('290320000002', '2020-03-29 00:16:32', 30000, 40000, 10000, 1, 'eceran'),
 ('291116000001', '2016-11-29 19:11:48', 105000, 120000, 15000, 1, 'eceran'),
 ('291116000002', '2016-11-29 19:49:20', 68000, 70000, 2000, 1, 'eceran'),
 ('291116000003', '2016-11-29 19:57:17', 8000, 10000, 2000, 1, 'eceran'),
@@ -410,17 +421,16 @@ INSERT INTO `tbl_jual` (`jual_nofak`, `jual_tanggal`, `jual_total`, `jual_jml_ua
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kategori`
+-- Table structure for table `tbl_kategori`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_kategori` (
-  `kategori_id` int(11) NOT NULL AUTO_INCREMENT,
-  `kategori_nama` varchar(35) DEFAULT NULL,
-  PRIMARY KEY (`kategori_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+CREATE TABLE `tbl_kategori` (
+  `kategori_id` int(11) NOT NULL,
+  `kategori_nama` varchar(35) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_kategori`
+-- Dumping data for table `tbl_kategori`
 --
 
 INSERT INTO `tbl_kategori` (`kategori_id`, `kategori_nama`) VALUES
@@ -463,97 +473,221 @@ INSERT INTO `tbl_kategori` (`kategori_id`, `kategori_nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_retur`
+-- Table structure for table `tbl_retur`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_retur` (
-  `retur_id` int(11) NOT NULL AUTO_INCREMENT,
-  `retur_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE `tbl_retur` (
+  `retur_id` int(11) NOT NULL,
+  `retur_tanggal` timestamp NULL DEFAULT current_timestamp(),
   `retur_barang_id` varchar(15) DEFAULT NULL,
   `retur_barang_nama` varchar(150) DEFAULT NULL,
   `retur_barang_satuan` varchar(30) DEFAULT NULL,
   `retur_harjul` double DEFAULT NULL,
   `retur_qty` int(11) DEFAULT NULL,
   `retur_subtotal` double DEFAULT NULL,
-  `retur_keterangan` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`retur_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `retur_keterangan` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_retur`
+--
+
+INSERT INTO `tbl_retur` (`retur_id`, `retur_tanggal`, `retur_barang_id`, `retur_barang_nama`, `retur_barang_satuan`, `retur_harjul`, `retur_qty`, `retur_subtotal`, `retur_keterangan`) VALUES
+(2, '2020-03-29 00:02:53', 'BR000032', 'Saklar Engkel Visalux B', 'PCS', 7750, 1, NULL, 'Rusak'),
+(3, '2020-03-29 00:03:45', 'BR000040', 'Saklar Arde Visalux 4L', 'PCS', 14000, 1, NULL, 'Ambyar');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_suplier`
+-- Table structure for table `tbl_suplier`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_suplier` (
-  `suplier_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_suplier` (
+  `suplier_id` int(11) NOT NULL,
   `suplier_nama` varchar(35) DEFAULT NULL,
   `suplier_alamat` varchar(60) DEFAULT NULL,
-  `suplier_notelp` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`suplier_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `suplier_notelp` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_suplier`
+--
+
+INSERT INTO `tbl_suplier` (`suplier_id`, `suplier_nama`, `suplier_alamat`, `suplier_notelp`) VALUES
+(1, 'Ardiansyah', 'Jl. Jalan 32', '09213024834'),
+(2, 'Bimoli production', 'jl.Mahakan', '01293312321');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_user` (
+  `user_id` int(11) NOT NULL,
   `user_nama` varchar(35) DEFAULT NULL,
   `user_username` varchar(30) DEFAULT NULL,
   `user_password` varchar(35) DEFAULT NULL,
   `user_level` varchar(2) DEFAULT NULL,
-  `user_status` varchar(2) DEFAULT '1',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `user_status` varchar(2) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_level`, `user_status`) VALUES
-(1, 'M Fikri Setiadi', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', '1'),
-(2, 'fikri', 'kasir', 'e10adc3949ba59abbe56e057f20f883e', '2', '1');
+(1, 'M Yusuf Mukharom', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', '1'),
+(2, 'Kasir hehe', 'kasir', 'c7911af3adbd12a035b289556d96470a', '2', '1'),
+(3, 'tes', 'tes', '28b662d883b6d76fd96e4ddc5e9ba780', '1', '0');
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Indexes for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tbl_barang`
+-- Indexes for table `tbl_barang`
+--
+ALTER TABLE `tbl_barang`
+  ADD PRIMARY KEY (`barang_id`),
+  ADD KEY `barang_user_id` (`barang_user_id`),
+  ADD KEY `barang_kategori_id` (`barang_kategori_id`);
+
+--
+-- Indexes for table `tbl_beli`
+--
+ALTER TABLE `tbl_beli`
+  ADD PRIMARY KEY (`beli_kode`),
+  ADD KEY `beli_user_id` (`beli_user_id`),
+  ADD KEY `beli_suplier_id` (`beli_suplier_id`),
+  ADD KEY `beli_id` (`beli_kode`);
+
+--
+-- Indexes for table `tbl_detail_beli`
+--
+ALTER TABLE `tbl_detail_beli`
+  ADD PRIMARY KEY (`d_beli_id`),
+  ADD KEY `d_beli_barang_id` (`d_beli_barang_id`),
+  ADD KEY `d_beli_nofak` (`d_beli_nofak`),
+  ADD KEY `d_beli_kode` (`d_beli_kode`);
+
+--
+-- Indexes for table `tbl_detail_jual`
+--
+ALTER TABLE `tbl_detail_jual`
+  ADD PRIMARY KEY (`d_jual_id`),
+  ADD KEY `d_jual_barang_id` (`d_jual_barang_id`),
+  ADD KEY `d_jual_nofak` (`d_jual_nofak`);
+
+--
+-- Indexes for table `tbl_jual`
+--
+ALTER TABLE `tbl_jual`
+  ADD PRIMARY KEY (`jual_nofak`),
+  ADD KEY `jual_user_id` (`jual_user_id`);
+
+--
+-- Indexes for table `tbl_kategori`
+--
+ALTER TABLE `tbl_kategori`
+  ADD PRIMARY KEY (`kategori_id`);
+
+--
+-- Indexes for table `tbl_retur`
+--
+ALTER TABLE `tbl_retur`
+  ADD PRIMARY KEY (`retur_id`);
+
+--
+-- Indexes for table `tbl_suplier`
+--
+ALTER TABLE `tbl_suplier`
+  ADD PRIMARY KEY (`suplier_id`);
+
+--
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_detail_beli`
+--
+ALTER TABLE `tbl_detail_beli`
+  MODIFY `d_beli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_detail_jual`
+--
+ALTER TABLE `tbl_detail_jual`
+  MODIFY `d_jual_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `tbl_kategori`
+--
+ALTER TABLE `tbl_kategori`
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `tbl_retur`
+--
+ALTER TABLE `tbl_retur`
+  MODIFY `retur_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_suplier`
+--
+ALTER TABLE `tbl_suplier`
+  MODIFY `suplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
   ADD CONSTRAINT `tbl_barang_ibfk_1` FOREIGN KEY (`barang_user_id`) REFERENCES `tbl_user` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_barang_ibfk_2` FOREIGN KEY (`barang_kategori_id`) REFERENCES `tbl_kategori` (`kategori_id`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tbl_beli`
+-- Constraints for table `tbl_beli`
 --
 ALTER TABLE `tbl_beli`
   ADD CONSTRAINT `tbl_beli_ibfk_1` FOREIGN KEY (`beli_user_id`) REFERENCES `tbl_user` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_beli_ibfk_2` FOREIGN KEY (`beli_suplier_id`) REFERENCES `tbl_suplier` (`suplier_id`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tbl_detail_beli`
+-- Constraints for table `tbl_detail_beli`
 --
 ALTER TABLE `tbl_detail_beli`
   ADD CONSTRAINT `tbl_detail_beli_ibfk_1` FOREIGN KEY (`d_beli_barang_id`) REFERENCES `tbl_barang` (`barang_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_detail_beli_ibfk_2` FOREIGN KEY (`d_beli_kode`) REFERENCES `tbl_beli` (`beli_kode`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tbl_detail_jual`
+-- Constraints for table `tbl_detail_jual`
 --
 ALTER TABLE `tbl_detail_jual`
   ADD CONSTRAINT `tbl_detail_jual_ibfk_1` FOREIGN KEY (`d_jual_barang_id`) REFERENCES `tbl_barang` (`barang_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_detail_jual_ibfk_2` FOREIGN KEY (`d_jual_nofak`) REFERENCES `tbl_jual` (`jual_nofak`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tbl_jual`
+-- Constraints for table `tbl_jual`
 --
 ALTER TABLE `tbl_jual`
   ADD CONSTRAINT `tbl_jual_ibfk_1` FOREIGN KEY (`jual_user_id`) REFERENCES `tbl_user` (`user_id`) ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

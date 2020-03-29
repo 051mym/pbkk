@@ -3,8 +3,7 @@
   <head>
     <title>Masuk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
+
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'assets/css/bootstrap.min.css'?>" rel="stylesheet">
     <!-- styles -->
@@ -21,7 +20,7 @@
 				<div class="login-wrapper">
 			        <div class="box">
 			            <div class="content-wrap">
-			                <img width="310px" src="<?php echo base_url().'assets/img/logo.png'?>"/>
+			                <img width="auto" height="auto" src="<?php echo base_url().'assets/img/logo.png'?>"/>
 			                <p><?php echo $this->session->flashdata('msg');?></p>
 	                        <hr/>
 	                        <form action="<?php echo base_url().'administrator/cekuser'?>" method="post">
@@ -36,7 +35,7 @@
 			        </div>
 
 			        <div class="already">
-			            <p>Username: admin<br/> Password: admin</p>
+			            <p>Username: admin | kasir<br/> Password: admin | kasir</p>
 			            
 			        </div>
 			    </div>
